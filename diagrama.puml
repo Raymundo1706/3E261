@@ -1,0 +1,12 @@
+class Monito
+class Herramienta
+class Personaje
+class hambre
+class sed
+Monito --|> Personaje
+Monito *-- Vida
+Monito o-- Herramienta
+Espada --|> Objeto
+Pala --|> Objeto
+Pico --|> Objeto
+Tierra --|> Objeto
