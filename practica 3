@@ -1,0 +1,65 @@
+class Entidad
+class Personaje
+class Animal
+class Objeto
+class Herramienta
+class Recurso
+class Bloque
+class Monito
+class Zombie
+class Vaca
+class Cerdo
+class Gallina
+class Espada
+class Hacha
+class Azada
+class Arco
+class Madera
+class Carne
+class Semilla
+class Arbol
+class Agua
+class Tierra
+class Pasto
+class Lava
+class Piedra
+class Inventario
+class Slot
+class Cofre
+class Mundo
+class SistemaTiempo
+Entidad <|-- Personaje
+Personaje <|-- Monito
+Personaje <|-- Zombie
+Entidad <|-- Animal
+Animal <|-- Vaca
+Animal <|-- Cerdo
+Animal <|-- Gallina
+Objeto <|-- Herramienta
+Herramienta <|-- Espada
+Herramienta <|-- Hacha
+Herramienta <|-- Azada
+Herramienta <|-- Arco
+Objeto <|-- Recurso
+Recurso <|-- Madera
+Recurso <|-- Carne
+Recurso <|-- Semilla
+Objeto <|-- Bloque
+Bloque <|-- Arbol
+Bloque <|-- Agua
+Bloque <|-- Tierra
+Bloque <|-- Pasto
+Bloque <|-- Lava
+Bloque <|-- Piedra
+Monito "1" *-- "1" Inventario
+Inventario "1" *-- "20" Slot
+Cofre "1" *-- "20" Slot
+Mundo "1" *-- "1" SistemaTiempo
+Mundo "1" o-- "0..*" Entidad
+Slot "1" --> "1" Objeto
+SistemaTiempo "1" --> "0..*" Zombie
+Zombie "1" --> "1" Monito : ataca
+Monito "1" --> "0..1" Herramienta : usa
+Animal "1" --> "1..2" Carne : genera
+Monito "1" --> "3" Entidad : vidas
+Zombie "1" --> "1" Entidad : vida
