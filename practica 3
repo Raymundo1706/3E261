@@ -63,3 +63,4 @@ Monito "1" --> "0..1" Herramienta : usa
 Animal "1" --> "1..2" Carne : genera
 Monito "1" --> "3" Entidad : vidas
 Zombie "1" --> "1" Entidad : vida
+jpla
