@@ -57,10 +57,21 @@ Cofre "1" *-- "20" Slot
 Mundo "1" *-- "1" SistemaTiempo
 Mundo "1" o-- "0..*" Entidad
 Slot "1" --> "1" Objeto
-SistemaTiempo "1" --> "0..*" Zombie
+SistemaTiempo "1" --> "0..*" Zombie : controla
 Zombie "1" --> "1" Monito : ataca
 Monito "1" --> "0..1" Herramienta : usa
 Animal "1" --> "1..2" Carne : genera
-Monito "1" --> "3" Entidad : vidas
-Zombie "1" --> "1" Entidad : vida
-jpla
+Herramienta <|-- Espada
+Espada --> Entidad : ataca
+
+class Espada {
+  - danio : int = 1
+}
+
+class Monito {
+  - vidas : int = 3
+}
+
+class Zombie {
+  - vida : int = 1
+}
