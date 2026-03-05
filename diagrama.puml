@@ -1,61 +1,214 @@
-class Entidad
-class Personaje
-class Animal
+@startuml
+
+'--------------------
+' CLASES BASE
+'--------------------
+
+class Entidad{
+ + corazones : int
+ + recibirDanio()
+}
+
+class Personaje{
+ + atacar()
+}
+
 class Objeto
-class Herramienta
+
+class Herramienta{
+ + usar()
+}
+
 class Recurso
+
 class Bloque
-class Monito
-class Zombie
-class Vaca
-class Cerdo
-class Gallina
-class Espada
-class Hacha
-class Azada
-class Arco
+
+
+''--------------------
+' PERSONAJES
+''--------------------
+
+class Monito{
+ + corazones = 7
+}
+
+class Zombie{
+ + corazones = 2
+}
+
+class Vaca{
+ + corazones = 1
+}
+
+class Cerdo{
+ + corazones = 1
+}
+
+class Gallina{
+ + corazones = 1
+}
+
+
+'--------------------
+' HERRAMIENTAS
+'--------------------
+
+class Espada{
+ + danio = 1
+}
+
+class Hacha{
+ + danio = 0.5
+}
+
+class Pico
+class Pala
+class CanaPescar
+
+
+'--------------------
+' RECURSOS
+'--------------------
+
 class Madera
-class Carne
-class Semilla
-class Arbol
-class Agua
-class Tierra
-class Pasto
-class Lava
 class Piedra
-class Inventario
-class Slot
+class Hierro
+class Oro
+class Tierra
+
+class CarneAnimal
+class CarneZombie
+class Pez
+
+
+'--------------------
+' BLOQUES DEL MUNDO
+'--------------------
+
+class Arbol
+class Lago
+
+
+'--------------------
+' INVENTARIO
+'--------------------
+
+class Inventario{
+ + slots = 5
+}
+
+class Slot{
+ + cantidad : int
+}
+
 class Cofre
+
+
+'--------------------
+' MUNDO
+'--------------------
+
 class Mundo
-class SistemaTiempo
+
+class SistemaTiempo{
+ + duracionDia = 20
+ + duracionNoche = 20
+}
+
+
+'--------------------
+' SISTEMAS DEL JUEGO
+'--------------------
+
+class SistemaCombate{
+ + atacar()
+ + calcularDanio()
+}
+
+class Ataque{
+ + danio : float
+}
+
+class Corazon{
+ + valor : int
+}
+
+class SistemaArrojar{
+ + generarArrojar()
+}
+
+class ArrojarItem{
+ + cantidad : int
+}
+
+class SistemaComida{
+ + comer()
+ + curar()
+}
+
+class SistemaPesca{
+ + pescar()
+}
+
+
+'--------------------
+' HERENCIA
+'--------------------
 
 Entidad <|-- Personaje
+
 Personaje <|-- Monito
 Personaje <|-- Zombie
-Entidad <|-- Animal
-Animal <|-- Vaca
-Animal <|-- Cerdo
-Animal <|-- Gallina
+Personaje <|-- Vaca
+Personaje <|-- Cerdo
+Personaje <|-- Gallina
+
 Objeto <|-- Herramienta
+Objeto <|-- Recurso
+Objeto <|-- Bloque
+
 Herramienta <|-- Espada
 Herramienta <|-- Hacha
-Herramienta <|-- Azada
-Herramienta <|-- Arco
-Objeto <|-- Recurso
+Herramienta <|-- Pico
+Herramienta <|-- Pala
+Herramienta <|-- CanaPescar
+
 Recurso <|-- Madera
-Recurso <|-- Carne
-Recurso <|-- Semilla
-Objeto <|-- Bloque
-Bloque <|-- Arbol
-Bloque <|-- Agua
-Bloque <|-- Tierra
-Bloque <|-- Pasto
-Bloque <|-- Lava
-Bloque <|-- Piedra
+Recurso <|-- Piedra
+Recurso <|-- Hierro
+Recurso <|-- Oro
+Recurso <|-- Tierra
+Recurso <|-- CarneAnimal
+Recurso <|-- CarneZombie
+Recurso <|-- Pez
+
+
+'--------------------
+' RELACIONES
+'--------------------
+
 Monito *-- Inventario
 Inventario *-- Slot
 Cofre *-- Slot
 Slot --> Objeto
+
 Mundo *-- SistemaTiempo
 Mundo o-- Entidad
+
 SistemaTiempo --> Zombie
+
+Personaje *-- Corazon
+
+SistemaCombate --> Personaje
+Personaje --> Ataque
+Herramienta --> Ataque
+
+SistemaArrojar --> Personaje
+ArrojarItem --> Recurso
+
+SistemaComida --> Monito
+SistemaComida --> Recurso
+
+SistemaPesca --> Lago
+SistemaPesca --> CanaPescar
+SistemaPesca --> Pez
