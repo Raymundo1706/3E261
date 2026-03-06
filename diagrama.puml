@@ -1,8 +1,8 @@
 @startuml
 
-'--------------------
+'========================
 ' CLASES BASE
-'--------------------
+'========================
 
 class Entidad{
  + corazones : int
@@ -24,9 +24,9 @@ class Recurso
 class Bloque
 
 
-''--------------------
+'========================
 ' PERSONAJES
-''--------------------
+'========================
 
 class Monito{
  + corazones = 7
@@ -49,9 +49,9 @@ class Gallina{
 }
 
 
-'--------------------
+'========================
 ' HERRAMIENTAS
-'--------------------
+'========================
 
 class Espada{
  + danio = 1
@@ -66,9 +66,9 @@ class Pala
 class CanaPescar
 
 
-'--------------------
+'========================
 ' RECURSOS
-'--------------------
+'========================
 
 class Madera
 class Piedra
@@ -81,17 +81,17 @@ class CarneZombie
 class Pez
 
 
-'--------------------
+'========================
 ' BLOQUES DEL MUNDO
-'--------------------
+'========================
 
 class Arbol
 class Lago
 
 
-'--------------------
+'========================
 ' INVENTARIO
-'--------------------
+'========================
 
 class Inventario{
  + slots = 5
@@ -104,9 +104,9 @@ class Slot{
 class Cofre
 
 
-'--------------------
+'========================
 ' MUNDO
-'--------------------
+'========================
 
 class Mundo
 
@@ -116,9 +116,9 @@ class SistemaTiempo{
 }
 
 
-'--------------------
+'========================
 ' SISTEMAS DEL JUEGO
-'--------------------
+'========================
 
 class SistemaCombate{
  + atacar()
@@ -151,9 +151,9 @@ class SistemaPesca{
 }
 
 
-'--------------------
+'========================
 ' HERENCIA
-'--------------------
+'========================
 
 Entidad <|-- Personaje
 
@@ -183,32 +183,35 @@ Recurso <|-- CarneZombie
 Recurso <|-- Pez
 
 
-'--------------------
-' RELACIONES
-'--------------------
+'========================
+' RELACIONES CON MULTIPLICIDAD
+'========================
 
-Monito *-- Inventario
-Inventario *-- Slot
-Cofre *-- Slot
-Slot --> Objeto
+Monito "1" *-- "1" Inventario
+Inventario "1" *-- "5" Slot
+Cofre "1" *-- "*" Slot
 
-Mundo *-- SistemaTiempo
-Mundo o-- Entidad
+Slot "1" --> "0..64" Objeto
 
-SistemaTiempo --> Zombie
+Mundo "1" *-- "1" SistemaTiempo
+Mundo "1" o-- "*" Entidad
 
-Personaje *-- Corazon
+SistemaTiempo "1" --> "*" Zombie
 
-SistemaCombate --> Personaje
-Personaje --> Ataque
-Herramienta --> Ataque
+Personaje "1" *-- "1..7" Corazon
 
-SistemaArrojar --> Personaje
-ArrojarItem --> Recurso
+SistemaCombate "1" --> "*" Personaje
+Personaje "1" --> "*" Ataque
+Herramienta "1" --> "1" Ataque
 
-SistemaComida --> Monito
-SistemaComida --> Recurso
+SistemaArrojar "1" --> "*" Personaje
+ArrojarItem "1" --> "1" Recurso
 
-SistemaPesca --> Lago
-SistemaPesca --> CanaPescar
-SistemaPesca --> Pez
+SistemaComida "1" --> "1" Monito
+SistemaComida "1" --> "*" Recurso
+
+SistemaPesca "1" --> "1" Lago
+SistemaPesca "1" --> "1" CanaPescar
+SistemaPesca "1" --> "*" Pez
+
+@enduml
