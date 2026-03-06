@@ -213,5 +213,3 @@ SistemaComida "1" --> "*" Recurso
 SistemaPesca "1" --> "1" Lago
 SistemaPesca "1" --> "1" CanaPescar
 SistemaPesca "1" --> "*" Pez
-
-@enduml
